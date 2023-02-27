@@ -1,10 +1,28 @@
-const EventEmitter = require('events');
+const promesaCumplida = false
 
-const emisorProductos = new EventEmitter;
-
-emisorProductos.on('compra', (total,numProductos) =>{
-    console.log(`Total de la compra : $${total}`);
-    console.log(`Numero de productos : ${numProductos}`);
+const miPromesa = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        if(promesaCumplida){
+            resolve('promesa cumplida');
+        }else{
+            reject('promesa rechazada..');
+        }
+    },3000)
 });
 
-emisorProductos.emit('compra',500,5);
+// manejar la promesa 
+const manejarPromesaCumplida = (valor) =>{
+    console.log(valor);
+};
+
+const manejarPromesaRechazada = (razonRechazar) =>{
+    console.log(razonRechazar);
+};
+
+miPromesa.then(manejarPromesaCumplida, manejarPromesaRechazada)
+
+
+
+// miPromesa.then((valor)=>{
+//     console.log(valor);
+// })
